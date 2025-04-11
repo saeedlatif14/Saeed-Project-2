@@ -258,6 +258,7 @@ def GetEmp():
 @app.route("/fetchdata", methods=['GET','POST'])
 def FetchData():
     emp_id = request.form['emp_id']
+    
 
     output = {}
     select_sql = "SELECT emp_id, first_name, last_name, primary_skill, location from employee where emp_id=%s"
