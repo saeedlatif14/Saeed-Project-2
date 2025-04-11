@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employee-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: employee-app
+  template:
+    metadata:
+      labels:
+        app: employee-app
+    spec:
+      containers:
+      - name: employee-app
+        image: 997414430619.dkr.ecr.us-east-1.amazonaws.com/employee-app:latest
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: employee-app-config
+        - secretRef:
+            name: employee-app-secret
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 15
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "250m"

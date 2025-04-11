@@ -1,0 +1,42 @@
+{
+    "apiVersion": "v1",
+    "kind": "PersistentVolume",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"PersistentVolume\",\"metadata\":{\"annotations\":{},\"name\":\"mysql-pv\"},\"spec\":{\"accessModes\":[\"ReadWriteOnce\"],\"capacity\":{\"storage\":\"1Gi\"},\"hostPath\":{\"path\":\"/mnt/data\"},\"persistentVolumeReclaimPolicy\":\"Retain\",\"storageClassName\":\"manual\"}}\n",
+            "pv.kubernetes.io/bound-by-controller": "yes"
+        },
+        "creationTimestamp": "2025-04-11T16:39:15Z",
+        "deletionGracePeriodSeconds": 0,
+        "deletionTimestamp": "2025-04-11T16:40:15Z",
+        "name": "mysql-pv",
+        "resourceVersion": "7721",
+        "uid": "ab157f0d-db92-4fc5-b38e-9c48906cd74d"
+    },
+    "spec": {
+        "accessModes": [
+            "ReadWriteOnce"
+        ],
+        "capacity": {
+            "storage": "1Gi"
+        },
+        "claimRef": {
+            "apiVersion": "v1",
+            "kind": "PersistentVolumeClaim",
+            "name": "mysql-pvc",
+            "namespace": "default",
+            "resourceVersion": "7409",
+            "uid": "0981c720-b23f-46b5-9afa-a2c64bf956ae"
+        },
+        "hostPath": {
+            "path": "/mnt/data",
+            "type": ""
+        },
+        "persistentVolumeReclaimPolicy": "Retain",
+        "storageClassName": "manual",
+        "volumeMode": "Filesystem"
+    },
+    "status": {
+        "phase": "Bound"
+    }
+}

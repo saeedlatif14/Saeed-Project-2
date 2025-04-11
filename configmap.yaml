@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: employee-app-config
+data:
+  DB_HOST: mysql-service
+  DB_USER: root
+  DBPORT: "3306"
+  DATABASE: employees
+  APP_COLOR: lime
+  APP_NAME: Slatif
+  S3_IMAGE_URL: S3_IMAGE_URL: https://saeed-bucket-project.s3.amazonaws.com/saeed.jpeg
+

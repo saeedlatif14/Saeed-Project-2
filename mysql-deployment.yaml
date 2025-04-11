@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      initContainers:
+      - name: init-mysql
+        image: busybox
+        command: ['sh', '-c', 'cp /init/init.sql /docker-entrypoint-initdb.d/init.sql']
+        volumeMounts:
+        - name: init-volume
+          mountPath: /init
+        - name: mysql-init
+          mountPath: /docker-entrypoint-initdb.d
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: employee-app-secret
+              key: DB_PASSWORD
+        volumeMounts:
+        - name: mysql-data
+          mountPath: /var/lib/mysql
+        - name: mysql-init
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: mysql-data
+        emptyDir: {}  # ❗ Guarantees a fresh volume for test
+      - name: init-volume
+        configMap:
+          name: mysql-init-script
+      - name: mysql-init
+        emptyDir: {}  # Where init container copies init.sql to
