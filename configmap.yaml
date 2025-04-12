@@ -10,5 +10,3 @@ data:
   APP_COLOR: lime
   APP_NAME: Slatif
   S3_IMAGE_URL: https://saeed-bucket-project.s3.amazonaws.com/saeed.jpeg
-
-
